@@ -20,7 +20,7 @@ namespace Samples.AspCoreEF.DAL.EF.Models
         public int? DisplayOrder { set; get; }
         public string Image { set; get; }
 
-        public bool? Status { set; get; }
+        
         public virtual IEnumerable<Product> Products { set; get; }
     }
 }

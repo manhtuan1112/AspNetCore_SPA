@@ -11,5 +11,7 @@ namespace Samples.AspCoreEF.DAL.EF.Infrastructure
         public DateTime? AddedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public string IPAddress { get; set; }
+        public bool? Status { set; get; }
+
     }
 }

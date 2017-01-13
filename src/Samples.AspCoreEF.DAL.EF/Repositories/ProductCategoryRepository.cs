@@ -16,6 +16,7 @@ namespace Samples.AspCoreEF.DAL.EF.Repositories
     {
         public ProductCategoryRepository(TaskSystemDbContext context) : base(context)
         {
+
         }
     }
 }

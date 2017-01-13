@@ -3,6 +3,7 @@
 
   "dependencies": {
     "NETStandard.Library": "1.6.1",
+    "Sample.AspCoreEF.Common": "1.0.0-*",
     "Samples.AspCoreEF.DAL.EF": "1.0.0-*"
   },
 

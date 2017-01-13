@@ -18,6 +18,10 @@ using Samples.AspCoreEF.Filters;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using React.AspNet;
+using Webpack;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Samples.AspCoreEF
 {
@@ -39,6 +43,8 @@ namespace Samples.AspCoreEF
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddWebpack();
             services.AddMvc(options =>
             {
                 //options.Filters.Add(typeof(SampleActionFilter)); // by type
@@ -55,11 +61,46 @@ namespace Samples.AspCoreEF
                 opts => opts.UseSqlServer(Configuration.GetConnectionString("SampleDemo"))
 
             );
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<TaskSystemDbContext>()
+            .AddDefaultTokenProviders();
+
+
             //services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
+            //Repositories
             services.AddTransient<IPersonRepository, PersonRepository>();
             services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<ITagRepository, TagRepository>();
+            services.AddTransient<IProductTagRepository, ProductTagRepository>();
+
+            //Services
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
+            services.AddTransient<IProductService, ProductService>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = false;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+
+                // Cookie settings
+                options.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromDays(150);
+                options.Cookies.ApplicationCookie.LoginPath = "/Account/LogIn";
+                options.Cookies.ApplicationCookie.LogoutPath = "/Account/LogOff";
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,7 +118,7 @@ namespace Samples.AspCoreEF
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+           
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {
@@ -91,6 +132,7 @@ namespace Samples.AspCoreEF
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+           
             SeedData.Initialize(app.ApplicationServices);
         }
     }

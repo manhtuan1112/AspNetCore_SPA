@@ -6,7 +6,7 @@
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("home", {
-                url: "/admin",
+                url: "/home",
                 parent: "base",
                 templateUrl: "/app/components/home/homeView.html",
                 controller: "homeController"

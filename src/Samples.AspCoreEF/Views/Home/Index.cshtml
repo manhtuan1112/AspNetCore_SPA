@@ -1,109 +1,296 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewBag.Title = "Index";
 }
+@section footerJS{
+    <script src="/Assets/client/js/jquery.wmuSlider.js"></script>
+    <script>
+        $('.example1').wmuSlider();
+    </script>
+}
+<div id="content">
+    <div class="shoes-grid">
+        <div class="wrap-in">
+            <div class="wmuSlider example1 slide-grid" style="overflow: hidden; height: 551px;">
+                <div class="wmuSliderWrapper">
+                    <article style="position: absolute; width: 100%; opacity: 0;">
+                        <div class="banner-matter">
+                            <div class="col-md-5 banner-bag">
+                                <img class="img-responsive " src="/Assets/client/images/bag.jpg" alt="Slide1">
+                            </div>
+                            <div class="col-md-7 banner-off">
+                                <h2>FLAT 50% 0FF</h2>
+                                <label>FOR ALL PURCHASE <b>VALUE</b></label>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et </p>
+                                <span class="on-get">GET NOW</span>
+                            </div>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Package Management" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Bring in libraries from NuGet, Bower, and npm, and automate tasks using Grunt or Gulp.
-                    <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner4.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
+                            <div class="clearfix"> </div>
+                        </div>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkId=518004">Bower</a> for managing client-side libraries</li>
-            <li>Theming using <a href="http://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
+                    </article>
+                    <article style="position: relative; width: 100%; opacity: 1;">
+                        <div class="banner-matter">
+                            <div class="col-md-5 banner-bag">
+                                <img class="img-responsive " src="/Assets/client/images/bag1.jpg" alt="Slide2">
+                            </div>
+                            <div class="col-md-7 banner-off">
+                                <h2>FLAT 50% 0FF</h2>
+                                <label>FOR ALL PURCHASE <b>VALUE</b></label>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et <!-- p -->
+                                    &lt; span class="on-get"&gt;GET NOW
+                                </p>
+                            </div>
+
+                            <div class="clearfix"> </div>
+                        </div>
+
+                    </article>
+
+                </div>
+
+                <ul class="wmuSliderPagination">
+                    <li><a href="#" class="">0</a></li>
+                    <li><a href="#" class="">1</a></li>
+                </ul>
+                <a class="wmuSliderPrev">Previous</a><a class="wmuSliderNext">Next</a><ul class="wmuSliderPagination"><li><a href="#" class="">0</a></li><li><a href="#" class="wmuActive">1</a></li></ul>
+            </div>
+        </div>
+        <div class="shoes-grid-left">
+            <a href="single.html">
+                <div class="col-md-6 con-sed-grid">
+                    <div class="elit-grid">
+                        <h4>consectetur  elit</h4>
+                        <label>FOR ALL PURCHASE VALUE</label>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>
+                        <span class="on-get">GET NOW</span>
+                    </div>
+                    <img class="img-responsive shoe-left" src="/Assets/client/images/sh.jpg" alt=" ">
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+            <a href="single.html">
+                <div class="col-md-6 con-sed-grid sed-left-top">
+                    <div class=" elit-grid">
+                        <h4>consectetur  elit</h4>
+                        <label>FOR ALL PURCHASE VALUE</label>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, </p>
+                        <span class="on-get">GET NOW</span>
+                    </div>
+                    <img class="img-responsive shoe-left" src="/Assets/client/images/wa.jpg" alt=" ">
+                    <div class="clearfix"> </div>
+                </div>
+            </a>
+        </div>
+        <div class="products">
+            <h5 class="latest-product">Sản Phẩm Mới Nhất</h5>
+            <a class="view-all" href="san-pham.html">Xem Tất Cả<span> </span></a>
+        </div>
+        <div class="product-left">
+            <div class="col-md-4 chain-grid grid-top-chain">
+                <a href="/san-pham-1.p-1.html"><img class="img-responsive chain" src="/Assets/client/images/ch.jpg" alt="San pham 1"></a>
+                <span class="star"> </span>
+                <div class="grid-chain-bottom">
+                    <h6><a href="/san-pham-1.p-1.html">San pham 1</a></h6>
+                    <div class="star-price">
+                        <div class="dolor-grid">
+                            <span class="actual">300</span>
+                            <span class="reducedfrom">400,000</span>
+                            <span class="rating">
+                                <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+                                <label for="rating-input-1-5" class="rating-star1"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
+                                <label for="rating-input-1-4" class="rating-star1"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
+                                <label for="rating-input-1-3" class="rating-star"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
+                                <label for="rating-input-1-2" class="rating-star"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
+                                <label for="rating-input-1-1" class="rating-star"> </label>
+                            </span>
+                        </div>
+                        <a class="now-get get-cart btnAddToCart" href="#" data-id="1">Mua hàng</a>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 chain-grid grid-top-chain">
+                <a href="/san-pham-2.p-2.html"><img class="img-responsive chain" src="/Assets/client/images/ba.jpg" alt="San pham 2"></a>
+                <span class="star"> </span>
+                <div class="grid-chain-bottom">
+                    <h6><a href="/san-pham-2.p-2.html">San pham 2</a></h6>
+                    <div class="star-price">
+                        <div class="dolor-grid">
+                            <span class="actual">300</span>
+                            <span class="reducedfrom">500,000</span>
+                            <span class="rating">
+                                <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+                                <label for="rating-input-1-5" class="rating-star1"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
+                                <label for="rating-input-1-4" class="rating-star1"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
+                                <label for="rating-input-1-3" class="rating-star"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
+                                <label for="rating-input-1-2" class="rating-star"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
+                                <label for="rating-input-1-1" class="rating-star"> </label>
+                            </span>
+                        </div>
+                        <a class="now-get get-cart btnAddToCart" href="#" data-id="2">Mua hàng</a>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 chain-grid grid-top-chain">
+                <a href="/san-pham-3.p-3.html"><img class="img-responsive chain" src="/Assets/client/images/bo.jpg" alt="San pham 3"></a>
+                <span class="star"> </span>
+                <div class="grid-chain-bottom">
+                    <h6><a href="/san-pham-3.p-3.html">San pham 3</a></h6>
+                    <div class="star-price">
+                        <div class="dolor-grid">
+                            <span class="actual">300</span>
+                            <span class="reducedfrom">400</span>
+                            <span class="rating">
+                                <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+                                <label for="rating-input-1-5" class="rating-star1"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
+                                <label for="rating-input-1-4" class="rating-star1"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
+                                <label for="rating-input-1-3" class="rating-star"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
+                                <label for="rating-input-1-2" class="rating-star"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
+                                <label for="rating-input-1-1" class="rating-star"> </label>
+                            </span>
+                        </div>
+                        <a class="now-get get-cart btnAddToCart" href="#" data-id="3">Mua hàng</a>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="products">
+            <h5 class="latest-product">Sản Phẩm Bán Chạy</h5>
+            <a class="view-all" href="san-pham-ban-chay.html">Xem Tất Cả<span> </span></a>
+        </div>
+        <div class="product-left">
+            <div class="col-md-4 chain-grid grid-top-chain">
+                <a href="/san-pham-4.p-6.html"><img class="img-responsive chain" src="/Assets/client/images/bott.jpg" alt="San pham 4"></a>
+                <span class="star"> </span>
+                <div class="grid-chain-bottom">
+                    <h6><a href="/san-pham-4.p-6.html">San pham 4</a></h6>
+                    <div class="star-price">
+                        <div class="dolor-grid">
+                            <span class="actual">300</span>
+                            <span class="reducedfrom">400</span>
+                            <span class="rating">
+                                <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+                                <label for="rating-input-1-5" class="rating-star1"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
+                                <label for="rating-input-1-4" class="rating-star1"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
+                                <label for="rating-input-1-3" class="rating-star"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
+                                <label for="rating-input-1-2" class="rating-star"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
+                                <label for="rating-input-1-1" class="rating-star"> </label>
+                            </span>
+                        </div>
+                        <a class="now-get get-cart btnAddToCart" href="#" data-id="6">Mua hàng</a>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 chain-grid grid-top-chain">
+                <a href="/san-pham-5.p-5.html"><img class="img-responsive chain" src="/Assets/client/images/bottle.jpg" alt="San pham 5"></a>
+                <span class="star"> </span>
+                <div class="grid-chain-bottom">
+                    <h6><a href="/san-pham-5.p-5.html">San pham 5</a></h6>
+                    <div class="star-price">
+                        <div class="dolor-grid">
+                            <span class="actual">300</span>
+                            <span class="reducedfrom">400</span>
+                            <span class="rating">
+                                <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+                                <label for="rating-input-1-5" class="rating-star1"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
+                                <label for="rating-input-1-4" class="rating-star1"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
+                                <label for="rating-input-1-3" class="rating-star"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
+                                <label for="rating-input-1-2" class="rating-star"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
+                                <label for="rating-input-1-1" class="rating-star"> </label>
+                            </span>
+                        </div>
+                        <a class="now-get get-cart btnAddToCart" href="#" data-id="5">Mua hàng</a>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 chain-grid grid-top-chain">
+                <a href="/san-pham-6.p-4.html"><img class="img-responsive chain" src="/Assets/client/images/baa.jpg" alt="San pham 6"></a>
+                <span class="star"> </span>
+                <div class="grid-chain-bottom">
+                    <h6><a href="/san-pham-6.p-4.html">San pham 6</a></h6>
+                    <div class="star-price">
+                        <div class="dolor-grid">
+                            <span class="actual">300</span>
+                            <span class="reducedfrom">400</span>
+                            <span class="rating">
+                                <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
+                                <label for="rating-input-1-5" class="rating-star1"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
+                                <label for="rating-input-1-4" class="rating-star1"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
+                                <label for="rating-input-1-3" class="rating-star"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
+                                <label for="rating-input-1-2" class="rating-star"> </label>
+                                <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
+                                <label for="rating-input-1-1" class="rating-star"> </label>
+                            </span>
+                        </div>
+                        <a class="now-get get-cart btnAddToCart" href="#" data-id="4">Mua hàng</a>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
     </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=699562">Add an appsetting in config and access it in app.</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkId=699318">Add client packages using Bower.</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run & Deploy</h2>
-        <ul>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="http://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
+
+    <div class="sub-cate">
+        <div class="top-nav rsidebar span_1_of_left">
+            <h3 class="cate">CATEGORIES</h3>
+            <ul class="menu">
+                <li class="item1">
+                    <a href="/giay-dep.pc-1.html">Giày dép </a>
+                </li>
+                <li class="item1">
+                    <a href="/tui-sach.pc-2.html">Túi sách </a>
+                </li>
+                <li class="item1">
+                    <a href="/trang-suc.pc-3.html">Trang Sức </a>
+                </li>
+                <li class="item1">
+                    <a href="/nuoc-hoa.pc-4.html">Nước Hoa </a>
+                </li>
+                <li class="item1">
+                    <a href="/dong-ho-deo-tay.pc-5.html">Đồng Hồ Đeo Tay </a>
+                </li>
+            </ul>
+        </div>
+        <!--initiate accordion-->
+
+        <div class="chain-grid menu-chain">
+            <a href="single.html"><img class="img-responsive chain" src="/Assets/client/images/wat.jpg" alt=""></a>
+            <div class="grid-chain-bottom chain-watch">
+                <span class="actual dolor-left-grid">300$</span>
+                <span class="reducedfrom">500$</span>
+                <h6><a href="single.html">Lorem ipsum dolor</a></h6>
+            </div>
+        </div>
+        <a class="view-all all-product" href="product.html">VIEW ALL PRODUCTS<span> </span></a>
     </div>
 </div>

@@ -19,12 +19,16 @@
     "Microsoft.Extensions.Logging": "1.1.0",
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
-    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "Samples.AspCoreEF.DAL.EF": "1.0.0-*",
     "Samples.AspCoreEF.Service": "1.0.0-*",
     "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.1.2",
-    "Microsoft.EntityFrameworkCore": "1.1.0"
+    "Microsoft.EntityFrameworkCore": "1.1.0",
+    "React.AspNet": "3.0.0",
+    "Webpack": "3.0.0",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
+    "IdentityServer4": "1.0.1"
   },
 
   "tools": {

@@ -15,8 +15,7 @@ namespace Samples.AspCoreEF.Filters
         {
             _dbContext = dbContext;
         }
-
-
+        
         public override void OnActionExecuted(ActionExecutedContext context)
         {
             if (!context.HttpContext.Request.Method.Equals("Post", StringComparison.OrdinalIgnoreCase))
@@ -32,6 +31,7 @@ namespace Samples.AspCoreEF.Filters
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
+
             if (!context.HttpContext.Request.Method.Equals("Post", StringComparison.OrdinalIgnoreCase))
                 return;
             _dbContext.Database.BeginTransaction();

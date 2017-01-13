@@ -17,6 +17,165 @@ namespace Samples.AspCoreEF.DAL.EF.Migrations
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ConcurrencyStamp");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("NormalizedName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationRoleId");
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<string>("RoleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationRoleId");
+
+                    b.ToTable("ApplicationRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<string>("Email");
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail");
+
+                    b.Property<string>("NormalizedUserName");
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<int>("Id");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("ApplicationUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("ProviderDisplayName");
+
+                    b.Property<string>("ProviderKey");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("ApplicationUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("RoleId");
+
+                    b.Property<string>("ApplicationRoleId");
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("ApplicationRoleId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("ApplicationUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("ApplicationUserTokens");
+                });
+
             modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.Person", b =>
                 {
                     b.Property<long>("Id")
@@ -29,6 +188,8 @@ namespace Samples.AspCoreEF.DAL.EF.Migrations
                     b.Property<DateTime?>("ModifiedDate");
 
                     b.Property<string>("Name");
+
+                    b.Property<bool?>("Status");
 
                     b.HasKey("Id");
 
@@ -75,6 +236,8 @@ namespace Samples.AspCoreEF.DAL.EF.Migrations
 
                     b.Property<int>("Quantity");
 
+                    b.Property<bool?>("Status");
+
                     b.Property<string>("Tags");
 
                     b.Property<int?>("ViewCount");
@@ -120,6 +283,39 @@ namespace Samples.AspCoreEF.DAL.EF.Migrations
                     b.ToTable("ProductCategory");
                 });
 
+            modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.ProductTag", b =>
+                {
+                    b.Property<long>("ProductID");
+
+                    b.Property<string>("TagID")
+                        .HasMaxLength(50);
+
+                    b.HasKey("ProductID", "TagID");
+
+                    b.HasIndex("TagID");
+
+                    b.ToTable("ProductTag");
+                });
+
+            modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.Tag", b =>
+                {
+                    b.Property<string>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Tag");
+                });
+
             modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.Task", b =>
                 {
                     b.Property<long>("Id")
@@ -137,6 +333,8 @@ namespace Samples.AspCoreEF.DAL.EF.Migrations
 
                     b.Property<byte>("State");
 
+                    b.Property<bool?>("Status");
+
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
@@ -146,11 +344,85 @@ namespace Samples.AspCoreEF.DAL.EF.Migrations
                     b.ToTable("Tasks");
                 });
 
+            modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.ApplicationRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(250);
+
+                    b.ToTable("ApplicationRole");
+
+                    b.HasDiscriminator().HasValue("ApplicationRole");
+                });
+
+            modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser");
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(256);
+
+                    b.Property<DateTime?>("BirthDay");
+
+                    b.Property<string>("FullName")
+                        .HasMaxLength(256);
+
+                    b.ToTable("ApplicationUser");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Samples.AspCoreEF.DAL.EF.Models.ApplicationRole")
+                        .WithMany("Claims")
+                        .HasForeignKey("ApplicationRoleId");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Samples.AspCoreEF.DAL.EF.Models.ApplicationUser")
+                        .WithMany("Claims")
+                        .HasForeignKey("ApplicationUserId");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Samples.AspCoreEF.DAL.EF.Models.ApplicationUser")
+                        .WithMany("Logins")
+                        .HasForeignKey("ApplicationUserId");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Samples.AspCoreEF.DAL.EF.Models.ApplicationRole")
+                        .WithMany("Users")
+                        .HasForeignKey("ApplicationRoleId");
+
+                    b.HasOne("Samples.AspCoreEF.DAL.EF.Models.ApplicationUser")
+                        .WithMany("Roles")
+                        .HasForeignKey("ApplicationUserId");
+                });
+
             modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.Product", b =>
                 {
                     b.HasOne("Samples.AspCoreEF.DAL.EF.Models.ProductCategory", "ProductCategory")
                         .WithMany("Products")
                         .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.ProductTag", b =>
+                {
+                    b.HasOne("Samples.AspCoreEF.DAL.EF.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Samples.AspCoreEF.DAL.EF.Models.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -1,7 +1,9 @@
 ﻿(function () {
     angular.module('onlineshop',
         ['onlineshop.home',
-         'onlineshop.product_categories'])
+         'onlineshop.product_categories',
+        'onlineshop.products',
+        'onlineshop.common'])
         .config(config)
         .config(configAuthentication);
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
@@ -12,8 +14,12 @@
                 url: '',
                 templateUrl: '/app/shared/views/baseView.html',
                 abstract: true
+            }).state('login', {
+                url: "/login",
+                templateUrl: "/app/components/login/loginView.html",
+                controller: "loginController"
             });
-        $urlRouterProvider.otherwise('/admin');
+        $urlRouterProvider.otherwise('/login');
     }
     function configAuthentication($httpProvider) {
         $httpProvider.interceptors.push(function ($q, $location) {
