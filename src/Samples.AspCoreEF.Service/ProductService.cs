@@ -10,10 +10,10 @@ namespace Samples.AspCoreEF.Service
 {
         public interface IProductService
         {
-            void Add(Product Product);
+            Product Add(Product Product);
             void Update(Product Product);
             void Delete(long id);
-            IEnumerable<Product> GetAll();
+            IEnumerable<Product> GetAllByCategory(long cateId);
             IEnumerable<Product> GetAll(string keyword);
             IEnumerable<Product> GetListProductByCategoryIdPaging(long categoryId, int page, int pageSize, string sort, out int totalRow);
             IEnumerable<Product> Search(string keyword, int page, int pageSize, string sort, out int totalRow);
@@ -32,9 +32,9 @@ namespace Samples.AspCoreEF.Service
                 this._productTagRepository = productTagRepository;
             }
 
-            public void Add(Product Product)
+            public Product Add(Product Product)
             {
-                 _productRepository.Insert(Product);
+                var newProduct= _productRepository.Insert(Product);
                 _productRepository.SaveChange();
                 if (!string.IsNullOrEmpty(Product.Tags))
                 {
@@ -57,6 +57,7 @@ namespace Samples.AspCoreEF.Service
                         _productTagRepository.Insert(productTag);
                     }
                 }
+                 return newProduct;
             }
 
             public void Update(Product Product)
@@ -72,9 +73,9 @@ namespace Samples.AspCoreEF.Service
 
             }
 
-            public IEnumerable<Product> GetAll()
+            public IEnumerable<Product> GetAllByCategory(long cateId)
             {
-                throw new NotImplementedException();
+                 return _productRepository.GetMulti(x => x.CategoryID == cateId);
             }
 
             public IEnumerable<Product> GetAll(string keyword)
@@ -88,7 +89,7 @@ namespace Samples.AspCoreEF.Service
                 return _productRepository.GetAll();
                 }
             }
-
+            
             public IEnumerable<Product> GetListProductByCategoryIdPaging(long categoryId, int page, int pageSize, string sort, out int totalRow)
             {
                 throw new NotImplementedException();

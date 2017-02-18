@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Samples.AspCoreEF.DAL.EF.Models;
+using System.Linq;
 
 namespace Samples.AspCoreEF.DAL.EF.EntityFrameworkContext
 {
@@ -18,6 +20,11 @@ namespace Samples.AspCoreEF.DAL.EF.EntityFrameworkContext
         public DbSet<ProductTag> ProductTags { get; set; }
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<ApplicationGroup> ApplicationGroups { get; set; }
+        public DbSet<ApplicationRoleGroup> ApplicationRoleGroups { get; set; }
+        public DbSet<ApplicationUserGroup> ApplicationUserGroups { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<ProductCategory>().ToTable("ProductCategory");
@@ -39,6 +46,14 @@ namespace Samples.AspCoreEF.DAL.EF.EntityFrameworkContext
             builder.Entity<IdentityUserClaim<string>>().ToTable("ApplicationUserClaims");
             builder.Entity<IdentityUserToken<string>>().HasKey(i => i.UserId);
             builder.Entity<IdentityUserToken<string>>().ToTable("ApplicationUserTokens");
+
+            builder.Entity<ApplicationUserGroup>().HasKey(t => new { t.UserId, t.GroupId });
+            builder.Entity<ApplicationRoleGroup>().HasKey(t => new { t.RoleId, t.GroupId });
+            //Remove cascading deletes
+            foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
     }
 }

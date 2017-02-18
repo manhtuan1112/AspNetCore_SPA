@@ -22,6 +22,13 @@ using React.AspNet;
 using Webpack;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Samples.AspCoreEF.Models;
+using Microsoft.AspNetCore.Authorization;
+using IdentityServer4.Services;
+using System.IdentityModel.Tokens.Jwt;
+using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Mvc;
+using Samples.AspCoreEF.Infrastructure.Services;
 
 namespace Samples.AspCoreEF
 {
@@ -45,16 +52,51 @@ namespace Samples.AspCoreEF
             // Add framework services.
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddWebpack();
+
             services.AddMvc(options =>
             {
                 //options.Filters.Add(typeof(SampleActionFilter)); // by type
                 options.Filters.Add(typeof(UnitOfWorkFilter)); // an instance
                 options.Filters.Add(typeof(GlobalExceptionFilter));
             });
+            services.AddMvcCore()
+                .AddAuthorization()
+                .AddJsonFormatters();
+
+            //services.Configure<MvcOptions>(options =>
+            //{
+            //    options.Filters.Add(new RequireHttpsAttribute());
+            //});
+
+
+
+            services.AddCors(
+           options => options.AddPolicy("AllowCors",
+               builder => {
+                   builder
+                       //.WithOrigins("http://localhost:4456") //AllowSpecificOrigins;  
+                       //.WithOrigins("http://localhost:4456", "http://localhost:4457") //AllowMultipleOrigins;  
+                       .AllowAnyOrigin() //AllowAllOrigins;  
+
+                   //.WithMethods("GET") //AllowSpecificMethods;  
+                   //.WithMethods("GET", "PUT") //AllowSpecificMethods;  
+                   //.WithMethods("GET", "PUT", "POST") //AllowSpecificMethods;  
+                   .WithMethods("GET", "PUT", "POST", "DELETE") //AllowSpecificMethods;  
+                                                                //.AllowAnyMethod() //AllowAllMethods;  
+
+                   //.WithHeaders("Accept", "Content-type", "Origin", "X-Custom-Header"); //AllowSpecificHeaders;  
+                   .AllowAnyHeader(); //AllowAllHeaders;  
+               })
+             );
+
             services.AddAutoMapper();
             //services.AddSingleton(Configuration);
             //services.AddSingleton<IConfiguration>(Configuration);
             var connectionString = Configuration.GetSection("ConnectionString").ToString();
+
+            var appSettings = Configuration.GetSection("AppSettings");
+
+            services.Configure<AppSettings>(appSettings);
 
             services.AddDbContext<TaskSystemDbContext>(
 
@@ -62,10 +104,36 @@ namespace Samples.AspCoreEF
 
             );
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = true;
+            })
             .AddEntityFrameworkStores<TaskSystemDbContext>()
             .AddDefaultTokenProviders();
 
+            //services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
+
+            // Add application services.
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+
+
+            // Adds IdentityServer
+            services.AddIdentityServer()
+                .AddTemporarySigningCredential()
+                .AddInMemoryIdentityResources(Config.GetIdentityResources())
+                .AddInMemoryApiResources(Config.GetApiResources())
+                .AddInMemoryClients(Config.GetClients())
+                .AddAspNetIdentity<ApplicationUser>();
+            //.AddProfileService<IdentityWithAdditionalClaimsProfileService>();
+
+
+
+
+            //services.AddAuthorization(options => {
+            //    options.AddPolicy("Admin", policy => policy.RequireClaim("role", "admin"));
+            //});
 
             //services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
             //Repositories
@@ -74,11 +142,18 @@ namespace Samples.AspCoreEF
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<ITagRepository, TagRepository>();
             services.AddTransient<IProductTagRepository, ProductTagRepository>();
-
+            
+            services.AddTransient<IApplicationGroupRepository, ApplicationGroupRepository>();
+            services.AddTransient<IApplicationRoleRepository, ApplicationRoleRepository>();
+            services.AddTransient<IApplicationRoleGroupRepository, ApplicationRoleGroupRepository>();
+            services.AddTransient<IApplicationUserGroupRepository, ApplicationUserGroupRepository>();
             //Services
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
             services.AddTransient<IProductService, ProductService>();
+
+            services.AddTransient<IApplicationGroupService, ApplicationGroupService>();
+            services.AddTransient<IApplicationRoleService, ApplicationRoleService>();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -132,8 +207,41 @@ namespace Samples.AspCoreEF
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-           
+
+            app.UseIdentity();
+            app.UseIdentityServer();
+
+            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            {
+                Authority = "http://localhost:5000",
+                RequireHttpsMetadata = false,
+
+                ApiName = "api1"
+            });
+
+            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            //IdentityServerAuthenticationOptions identityServerValidationOptions = new IdentityServerAuthenticationOptions
+            //{
+            //    Authority = ConfigIdentityServer4.HOST_URL + "/",
+            //    AllowedScopes = new List<string> { "dataEventRecords" },
+            //    ApiSecret = "dataEventRecordsSecret",
+            //    ApiName = "dataEventRecords",
+            //    AutomaticAuthenticate = true,
+            //    SupportedTokens = SupportedTokens.Both,
+            //    // TokenRetriever = _tokenRetriever,
+            //    // required if you want to return a 403 and not a 401 for forbidden responses
+            //    AutomaticChallenge = true,
+            //};
+
+            //app.UseIdentityServerAuthentication(identityServerValidationOptions);
+
+
+            //Enable CORS policy "AllowCors"  
+            app.UseCors("AllowCors");
+
             SeedData.Initialize(app.ApplicationServices);
+
         }
     }
 }

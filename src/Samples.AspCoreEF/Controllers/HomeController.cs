@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Samples.AspCoreEF.Controllers
 {
+     
     public class HomeController : Controller
     {
+       
         public IActionResult Index()
         {
             return View();

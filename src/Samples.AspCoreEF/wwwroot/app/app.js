@@ -3,6 +3,9 @@
         ['onlineshop.home',
          'onlineshop.product_categories',
         'onlineshop.products',
+        'onlineshop.application_groups',
+        'onlineshop.application_roles',
+        'onlineshop.application_users',
         'onlineshop.common'])
         .config(config)
         .config(configAuthentication);
@@ -33,7 +36,7 @@
                     return $q.reject(rejection);
                 },
                 response: function (response) {
-                    if (response.status === "401") {
+                    if (response.status == "401") {
                         $location.path('/login');
                     }
                     //the same response/modified/or a new one need to be returned.
@@ -41,7 +44,7 @@
                 },
                 responseError: function (rejection) {
 
-                    if (rejection.status === "401") {
+                    if (rejection.status == "401") {
                         $location.path('/login');
                     }
                     return $q.reject(rejection);

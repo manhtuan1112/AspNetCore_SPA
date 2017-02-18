@@ -10,7 +10,7 @@ namespace Samples.AspCoreEF.DAL.EF.Infrastructure
 
         T Get(long id);
 
-        void Insert(T entity);
+        T Insert(T entity);
 
         void Update(T entity);
 
@@ -31,11 +31,18 @@ namespace Samples.AspCoreEF.DAL.EF.Infrastructure
 
         T Get(long id);
 
-        void Insert(T entity);
+        T Insert(T entity);
 
         void Update(T entity);
 
         void Delete(T entity);
+
+        //Delete multi records
+        void DeleteMulti(Expression<Func<T, bool>> where);
+
+        // Get an entity by int id
+        T GetSingleById(long id);
+
 
         T GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null);
 

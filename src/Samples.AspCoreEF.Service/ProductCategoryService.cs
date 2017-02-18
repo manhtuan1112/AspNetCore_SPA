@@ -10,7 +10,7 @@ namespace Samples.AspCoreEF.Service
 {
     public interface IProductCategoryService
     {
-        void Add(ProductCategory ProductCategory);
+        ProductCategory Add(ProductCategory ProductCategory);
         void Update(ProductCategory ProductCategory);
         void Delete(long id);
         IEnumerable<ProductCategory> GetAll();
@@ -26,9 +26,9 @@ namespace Samples.AspCoreEF.Service
             this._ProductCategoryRepository = ProductCategoryRepository;
         }
 
-        public void Add(ProductCategory ProductCategory)
+        public ProductCategory Add(ProductCategory ProductCategory)
         {
-            _ProductCategoryRepository.Insert(ProductCategory);
+           return _ProductCategoryRepository.Insert(ProductCategory);
         }
 
         public void Delete(long id)

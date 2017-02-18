@@ -176,6 +176,49 @@ namespace Samples.AspCoreEF.DAL.EF.Migrations
                     b.ToTable("ApplicationUserTokens");
                 });
 
+            modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.ApplicationGroup", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(250);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(250);
+
+                    b.HasKey("ID");
+
+                    b.ToTable("ApplicationGroups");
+                });
+
+            modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.ApplicationRoleGroup", b =>
+                {
+                    b.Property<string>("RoleId");
+
+                    b.Property<long>("GroupId");
+
+                    b.HasKey("RoleId", "GroupId");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("ApplicationRoleGroups");
+                });
+
+            modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.ApplicationUserGroup", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<long>("GroupId");
+
+                    b.HasKey("UserId", "GroupId");
+
+                    b.HasIndex("GroupId");
+
+                    b.ToTable("ApplicationUserGroups");
+                });
+
             modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.Person", b =>
                 {
                     b.Property<long>("Id")
@@ -360,13 +403,21 @@ namespace Samples.AspCoreEF.DAL.EF.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser");
 
+                    b.Property<DateTime>("AccountExpires");
+
                     b.Property<string>("Address")
                         .HasMaxLength(256);
 
                     b.Property<DateTime?>("BirthDay");
 
+                    b.Property<string>("DataEventRecordsRole");
+
                     b.Property<string>("FullName")
                         .HasMaxLength(256);
+
+                    b.Property<bool>("IsAdmin");
+
+                    b.Property<string>("SecuredFilesRole");
 
                     b.ToTable("ApplicationUser");
 
@@ -405,25 +456,44 @@ namespace Samples.AspCoreEF.DAL.EF.Migrations
                         .HasForeignKey("ApplicationUserId");
                 });
 
+            modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.ApplicationRoleGroup", b =>
+                {
+                    b.HasOne("Samples.AspCoreEF.DAL.EF.Models.ApplicationGroup", "ApplicationGroup")
+                        .WithMany()
+                        .HasForeignKey("GroupId");
+
+                    b.HasOne("Samples.AspCoreEF.DAL.EF.Models.ApplicationRole", "ApplicationRole")
+                        .WithMany()
+                        .HasForeignKey("RoleId");
+                });
+
+            modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.ApplicationUserGroup", b =>
+                {
+                    b.HasOne("Samples.AspCoreEF.DAL.EF.Models.ApplicationGroup", "ApplicationGroup")
+                        .WithMany()
+                        .HasForeignKey("GroupId");
+
+                    b.HasOne("Samples.AspCoreEF.DAL.EF.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.Product", b =>
                 {
                     b.HasOne("Samples.AspCoreEF.DAL.EF.Models.ProductCategory", "ProductCategory")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CategoryID");
                 });
 
             modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.ProductTag", b =>
                 {
                     b.HasOne("Samples.AspCoreEF.DAL.EF.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProductID");
 
                     b.HasOne("Samples.AspCoreEF.DAL.EF.Models.Tag", "Tag")
                         .WithMany()
-                        .HasForeignKey("TagID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TagID");
                 });
 
             modelBuilder.Entity("Samples.AspCoreEF.DAL.EF.Models.Task", b =>

@@ -8,9 +8,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+
 namespace Samples.AspCoreEF.Controllers
 {
-    [Route("api/[controller]")]
+    
+    [EnableCors("AllowCors"), Route("api/[controller]")]
+    
+    [Produces("application/json")]
     public class ProductCategoryController : Controller
     {
         #region Initialize
@@ -80,11 +86,13 @@ namespace Samples.AspCoreEF.Controllers
         public IActionResult Create([FromBody] ProductCategoryViewModel productCategory)
         {
             if (productCategory == null) return BadRequest();
-            _productCategoryService.Add(_mapper.Map<ProductCategoryViewModel,ProductCategory>(productCategory));
+            var productCate= _productCategoryService.Add(_mapper.Map<ProductCategoryViewModel,ProductCategory>(productCategory));
+            
             return new NoContentResult();
         }
         [Route("getbyid/{id:long}")]
         [HttpGet]
+        
         public IActionResult GetById(long id)
         {
             var productCategory = _productCategoryService.GetById(id);
@@ -92,7 +100,7 @@ namespace Samples.AspCoreEF.Controllers
             return new ObjectResult(_mapper.Map<ProductCategory,ProductCategoryViewModel>(productCategory));
         }
 
-        [HttpPut("update")]
+        [HttpPut("update")]        
         public IActionResult Update([FromBody] ProductCategoryViewModel productCategory)
         {
             if (productCategory == null) return BadRequest();

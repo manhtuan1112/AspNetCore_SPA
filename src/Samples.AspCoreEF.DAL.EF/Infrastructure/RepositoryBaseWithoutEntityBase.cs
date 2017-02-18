@@ -13,7 +13,10 @@ namespace Samples.AspCoreEF.DAL.EF.Infrastructure
         private readonly TaskSystemDbContext _context;
         private DbSet<T> entities;
         string errorMessage = string.Empty;
-
+        protected TaskSystemDbContext DbContext
+        {
+            get { return _context; }
+        }
         public RepositoryBaseWithoutEntityBase(TaskSystemDbContext context)
         {
             this._context = context;
@@ -52,7 +55,7 @@ namespace Samples.AspCoreEF.DAL.EF.Infrastructure
 
             return _context.Set<T>().Where<T>(predicate).AsQueryable<T>();
         }
-        public void Insert(T entity)
+        public T Insert(T entity)
         {
             if (entity == null)
             {
@@ -60,6 +63,7 @@ namespace Samples.AspCoreEF.DAL.EF.Infrastructure
             }
             entities.Add(entity);
             _context.SaveChanges();
+            return entity;
         }
 
         public void Update(T entity)
@@ -90,6 +94,22 @@ namespace Samples.AspCoreEF.DAL.EF.Infrastructure
         public bool CheckContains(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().Count<T>(predicate) > 0;
+        }
+
+        public virtual void DeleteMulti(Expression<Func<T, bool>> where)
+        {
+            IEnumerable<T> objects = entities.Where<T>(where).AsEnumerable();
+            foreach (T obj in objects)
+            {
+                entities.Remove(obj);
+            }
+
+            _context.SaveChanges();
+        }
+
+        public T GetSingleById(long id)
+        {
+            return entities.Find(id);
         }
     }
 }

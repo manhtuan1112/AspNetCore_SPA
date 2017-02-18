@@ -1,7 +1,7 @@
 ﻿(function (app) {
     app.controller('productAddController', productAddController);
-    productAddController.$inject = ['apiService', '$scope', 'notificationService', '$state', 'commonService'];
-    function productAddController(apiService, $scope, notificationService, $state, commonService) {
+    productAddController.$inject = ['apiService','$http', '$scope', 'notificationService', '$state', 'commonService'];
+    function productAddController(apiService,$http, $scope, notificationService, $state, commonService) {
         $scope.product = {
             addedDate: new Date(),
             status: true
@@ -17,17 +17,40 @@
             $scope.product.alias = commonService.getSeoTitle($scope.product.name);
         }
 
-        function AddProduct() {
-            $scope.product.moreImages = JSON.stringify($scope.moreImages);
-            apiService.post('/api/product/create', $scope.product,
-            function (result) {
-                notificationService.displaySuccess($scope.product.name + ' is added successfully');
-                $state.go('products');
-            },
-            function (error) {
-                notificationService.displayError('Failed to add product');
+       
 
+      
+
+        function AddProduct() {
+            var file = $scope.myFile;
+            console.log('file is ');
+            console.dir(file);
+            var fd = new FormData();
+            fd.append('file', file);
+          
+            $http.post('/api/product/PostImage', fd, {
+                  transformRequest: angular.identity,
+                  headers: {'Content-Type': undefined}
+            }).then(function (result) {
+                $scope.product.image = result.data;
+                apiService.post('/api/product/create', $scope.product,
+               function (result) {
+                   notificationService.displaySuccess($scope.product.name + ' is added successfully');
+                   $state.go('products');
+               },
+               function (error) {
+                   notificationService.displayError('Failed to add product');
+
+               });
+
+
+                success(result);
+            }, function (error) {
+               
             });
+
+           
+          
         }
 
         function loadProductCategory() {
@@ -40,14 +63,7 @@
         }
 
         $scope.ChooseImage = function () {
-            var finder = new CKFinder();
-            finder.selectActionFunction = function (fileUrl) {
-                $scope.$apply(function () {
-                    $scope.product.Image = fileUrl;
-                })
-
-            }
-            finder.popup();
+            
         };
         $scope.moreImages = [];
         $scope.ChooseMoreImage = function () {

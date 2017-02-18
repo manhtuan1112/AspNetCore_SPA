@@ -52,7 +52,7 @@ namespace Samples.AspCoreEF.DAL.EF.Infrastructure
 
             return _context.Set<T>().Where<T>(predicate).AsQueryable<T>();
         }
-        public void Insert(T entity)
+        public T Insert(T entity)
         {
             if (entity == null)
             {
@@ -60,6 +60,7 @@ namespace Samples.AspCoreEF.DAL.EF.Infrastructure
             }
             entities.Add(entity);
             _context.SaveChanges();
+            return entity;
         }
 
         public void Update(T entity)

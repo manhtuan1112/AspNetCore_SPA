@@ -35,5 +35,38 @@ namespace Samples.AspCoreEF.Infrastructure.Extensions
             product.Quantity = productVm.Quantity;
             
         }
+        public static void UpdateUser(this ApplicationUser appUser, ApplicationUserViewModel appUserViewModel, string action = "add")
+        {
+
+            appUser.Id = appUserViewModel.Id;
+            appUser.FullName = appUserViewModel.FullName;
+            appUser.BirthDay = appUserViewModel.BirthDay;
+            appUser.Email = appUserViewModel.Email;
+            appUser.UserName = appUserViewModel.UserName;
+            appUser.PhoneNumber = appUserViewModel.PhoneNumber;
+
+            appUser.IsAdmin = appUserViewModel.IsAdmin;
+            appUser.DataEventRecordsRole = appUserViewModel.DataEventRecordsRole;
+            appUser.SecuredFilesRole = appUserViewModel.SecuredFilesRole;
+            appUser.AccountExpires = appUserViewModel.AccountExpires;
+        }
+
+        public static void UpdateApplicationGroup(this ApplicationGroup appGroup, ApplicationGroupViewModel appGroupViewModel)
+        {
+            appGroup.ID = appGroupViewModel.ID;
+            appGroup.Name = appGroupViewModel.Name;
+            appGroup.Description = appGroupViewModel.Description;
+        }
+
+        public static void UpdateApplicationRole(this ApplicationRole appRole, ApplicationRoleViewModel appRoleViewModel, string action = "add")
+        {
+            if (action == "update")
+                appRole.Id = appRoleViewModel.Id;
+            else
+                appRole.Id = Guid.NewGuid().ToString();
+            appRole.Name = appRoleViewModel.Name;
+            appRole.Description = appRoleViewModel.Description;
+        }
+
     }
 }

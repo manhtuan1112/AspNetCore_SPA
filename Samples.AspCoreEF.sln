@@ -18,8 +18,6 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Samples.AspCoreEF.Service",
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sample.AspCoreEF.Common", "src\Sample.AspCoreEF.Common\Sample.AspCoreEF.Common.xproj", "{7464EE7A-9000-48EC-9D07-F6C876825145}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sample.IdentityServer", "src\Sample.IdentityServer\Sample.IdentityServer.xproj", "{F2037B28-8F6F-46B0-AF70-BDECB49667EF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,10 +40,6 @@ Global
 		{7464EE7A-9000-48EC-9D07-F6C876825145}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7464EE7A-9000-48EC-9D07-F6C876825145}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7464EE7A-9000-48EC-9D07-F6C876825145}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F2037B28-8F6F-46B0-AF70-BDECB49667EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2037B28-8F6F-46B0-AF70-BDECB49667EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2037B28-8F6F-46B0-AF70-BDECB49667EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2037B28-8F6F-46B0-AF70-BDECB49667EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +49,5 @@ Global
 		{CAADFE8E-3C74-4D2A-ABA3-EAF71805D60E} = {45919575-4C0C-417C-8A15-C90974D945E2}
 		{CBFF0BAD-0299-4065-A342-F81136C6A53C} = {45919575-4C0C-417C-8A15-C90974D945E2}
 		{7464EE7A-9000-48EC-9D07-F6C876825145} = {45919575-4C0C-417C-8A15-C90974D945E2}
-		{F2037B28-8F6F-46B0-AF70-BDECB49667EF} = {45919575-4C0C-417C-8A15-C90974D945E2}
 	EndGlobalSection
 EndGlobal

@@ -22,6 +22,13 @@ namespace Samples.AspCoreEF
             CreateMap<TagViewModel, Tag>();
             CreateMap<ProductTag, ProductTagViewModel>();
             CreateMap<ProductTagViewModel, ProductTag>();
+            CreateMap<ApplicationUser, ApplicationUserViewModel>();
+            CreateMap<ApplicationUserViewModel, ApplicationUser>();
+            CreateMap<ApplicationGroup, ApplicationGroupViewModel>();
+            CreateMap<ApplicationGroupViewModel, ApplicationGroup>();
+            CreateMap<ApplicationRole, ApplicationRoleViewModel>();
+            CreateMap<ApplicationRoleViewModel, ApplicationRole>();
+
         }
     }
 }
